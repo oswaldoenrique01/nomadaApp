@@ -15,15 +15,6 @@ class DateUtils {
     return '${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year}';
   }
 
-  static String formatDateLong(DateTime date) {
-    const months = [
-      'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
-      'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
-    ];
-    
-    return '${date.day} de ${months[date.month - 1]} de ${date.year}';
-  }
-
   static bool isValidAge(DateTime birthDate, {int minAge = 13, int maxAge = 120}) {
     final age = calculateAge(birthDate);
     return age >= minAge && age <= maxAge;

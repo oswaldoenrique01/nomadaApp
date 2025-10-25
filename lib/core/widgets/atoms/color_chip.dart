@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../constants/app_sizes.dart';
 
 class ColorChip extends StatelessWidget {
   final Color color;
@@ -17,10 +18,10 @@ class ColorChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: padding ?? const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: padding ?? EdgeInsets.symmetric(horizontal: AppSizes.paddingSmall, vertical: AppSizes.paddingXS),
       decoration: BoxDecoration(
         color: color,
-        borderRadius: borderRadius ?? BorderRadius.circular(16),
+        borderRadius: borderRadius ?? BorderRadius.circular(AppSizes.radiusM),
         border: Border.all(color: Colors.grey.shade300),
       ),
       child: Text(

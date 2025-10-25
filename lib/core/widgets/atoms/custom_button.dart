@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../constants/app_sizes.dart';
 
 enum ButtonType { elevated, outlined, text, filled }
 
@@ -12,7 +13,6 @@ class CustomButton extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final BorderRadius? borderRadius;
   final double? width;
-  final bool isLoading;
 
   const CustomButton({
     super.key,
@@ -25,7 +25,6 @@ class CustomButton extends StatelessWidget {
     this.padding,
     this.borderRadius,
     this.width,
-    this.isLoading = false,
   });
 
   @override
@@ -48,52 +47,52 @@ class CustomButton extends StatelessWidget {
       case ButtonType.elevated:
         return icon != null
             ? ElevatedButton.icon(
-                onPressed: isLoading ? null : onPressed,
+                onPressed:  onPressed,
                 style: style,
                 icon: Icon(icon),
                 label: child,
               )
             : ElevatedButton(
-                onPressed: isLoading ? null : onPressed,
+                onPressed: onPressed,
                 style: style,
                 child: child,
               );
       case ButtonType.outlined:
         return icon != null
             ? OutlinedButton.icon(
-                onPressed: isLoading ? null : onPressed,
+                onPressed: onPressed,
                 style: style,
                 icon: Icon(icon),
                 label: child,
               )
             : OutlinedButton(
-                onPressed: isLoading ? null : onPressed,
+                onPressed: onPressed,
                 style: style,
                 child: child,
               );
       case ButtonType.text:
         return icon != null
             ? TextButton.icon(
-                onPressed: isLoading ? null : onPressed,
+                onPressed: onPressed,
                 style: style,
                 icon: Icon(icon),
                 label: child,
               )
             : TextButton(
-                onPressed: isLoading ? null : onPressed,
+                onPressed: onPressed,
                 style: style,
                 child: child,
               );
       case ButtonType.filled:
         return icon != null
             ? FilledButton.icon(
-                onPressed: isLoading ? null : onPressed,
+                onPressed: onPressed,
                 style: style,
                 icon: Icon(icon),
                 label: child,
               )
             : FilledButton(
-                onPressed: isLoading ? null : onPressed,
+                onPressed: onPressed,
                 style: style,
                 child: child,
               );
@@ -101,13 +100,6 @@ class CustomButton extends StatelessWidget {
   }
 
   Widget _buildButtonChild() {
-    if (isLoading) {
-      return const SizedBox(
-        height: 20,
-        width: 20,
-        child: CircularProgressIndicator(strokeWidth: 2),
-      );
-    }
     return Text(text);
   }
 
@@ -121,10 +113,10 @@ class CustomButton extends StatelessWidget {
           : null,
       padding: padding != null
           ? WidgetStateProperty.all(padding)
-          : WidgetStateProperty.all(const EdgeInsets.symmetric(vertical: 16)),
+          : WidgetStateProperty.all(EdgeInsets.symmetric(vertical: AppSizes.paddingMedium)),
       shape: WidgetStateProperty.all(
         RoundedRectangleBorder(
-          borderRadius: borderRadius ?? BorderRadius.circular(25),
+          borderRadius: borderRadius ?? BorderRadius.circular(AppSizes.radiusXL),
         ),
       ),
     );

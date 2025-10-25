@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import '../atoms/custom_avatar.dart';
-import '../atoms/gradient_container.dart';
-import '../../theme/app_colors.dart';
+
+import '../../../core/theme/app_colors.dart';
+import '../../../core/widgets/atoms/custom_avatar.dart';
+import '../../../core/widgets/atoms/gradient_container.dart';
+import '../../../core/constants/app_sizes.dart';
 
 class ProfileHeader extends StatelessWidget {
   final String name;
@@ -25,8 +27,12 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return GradientContainer(
       height: height,
+      width: width,
+      borderRadius: BorderRadius.zero,
       gradient: gradient ??
           const LinearGradient(
             colors: [AppColors.primary, AppColors.secondary],
@@ -40,20 +46,20 @@ class ProfileHeader extends StatelessWidget {
             GestureDetector(
               onTap: onAvatarTap,
               child: CustomAvatar(
-                size: 120,
+                size: AppSizes.avatarLarge,
                 backgroundColor: AppColors.accent,
                 imageUrl: avatarUrl,
                 initials: avatarInitials,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withAlpha(51),
-                    blurRadius: 10,
-                    offset: const Offset(0, 5),
+                    blurRadius: AppSizes.size2,
+                    offset: Offset(0, AppSizes.size1 / 2),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: AppSizes.spacingLarge),
             Text(
               name,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -62,7 +68,7 @@ class ProfileHeader extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: AppSizes.spacingSmall),
             Text(
               subtitle,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(

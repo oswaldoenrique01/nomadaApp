@@ -36,6 +36,16 @@ class AppSizes {
   static const double paddingL = size4;
   static const double paddingXL = size5;
   
+  static const double paddingSmall = size2;
+  static const double paddingMedium = size3;
+  static const double paddingLarge = size4;
+  
+  static const double spacingSmall = size1;
+  static const double spacingMedium = size2;
+  static const double spacingLarge = size3;
+  static const double spacingXLarge = size4;
+  static const double spacingXXLarge = size6;
+  
   static const double marginXS = size1;
   static const double marginS = size2;
   static const double marginM = size3;

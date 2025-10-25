@@ -1,106 +1,70 @@
 import 'package:flutter/material.dart';
+import '../../models/address_model.dart';
 import '../molecules/address_card.dart';
-import '../atoms/custom_button.dart';
 import '../../theme/app_colors.dart';
-
-class AddressModel {
-  final String id;
-  final String title;
-  final String subtitle;
-
-  const AddressModel({
-    required this.id,
-    required this.title,
-    required this.subtitle,
-  });
-}
+import '../../constants/app_sizes.dart';
 
 class AddressList extends StatelessWidget {
   final String title;
   final List<AddressModel> addresses;
-  final VoidCallback? onAddAddress;
-  final Function(AddressModel)? onEditAddress;
-  final Function(AddressModel)? onDeleteAddress;
-  final VoidCallback? onLogout;
+  final Function(int)? onEditAddress;
+  final Function(int)? onDeleteAddress;
   final EdgeInsetsGeometry? padding;
 
   const AddressList({
     super.key,
     required this.title,
     required this.addresses,
-    this.onAddAddress,
     this.onEditAddress,
     this.onDeleteAddress,
-    this.onLogout,
     this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.background,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
-        ),
-      ),
-      child: Padding(
-        padding: padding ?? const EdgeInsets.all(24.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                color: AppColors.textPrimary,
-                fontWeight: FontWeight.bold,
-              ),
+    return Padding(
+      padding:
+          padding ??
+          const EdgeInsets.only(
+            left: AppSizes.paddingMedium,
+            right: AppSizes.paddingMedium,
+            top: AppSizes.paddingMedium,
+          ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              color: AppColors.textPrimary,
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(height: 20),
-            
-            // Lista de direcciones
-            ...addresses.map((address) => Padding(
-                  padding: const EdgeInsets.only(bottom: 16.0),
+          ),
+          SizedBox(height: AppSizes.paddingMedium,),
+          Expanded(
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                final address = addresses[index];
+                return Padding(
+                  padding: EdgeInsets.only(bottom: AppSizes.spacingMedium),
                   child: AddressCard(
-                    title: address.title,
-                    subtitle: address.subtitle,
+                    title:
+                        '${address.country}, ${address.department}, \n${address.municipality}',
+                    subtitle: address.municipality,
                     onEdit: onEditAddress != null
-                        ? () => onEditAddress!(address)
+                        ? () => onEditAddress!(index)
                         : null,
-                    onDelete: onDeleteAddress != null
-                        ? () => onDeleteAddress!(address)
+                    onDelete: addresses.length == 1 ? null : onDeleteAddress != null
+                        ? () => onDeleteAddress!(index)
                         : null,
                   ),
-                )),
-            
-            const SizedBox(height: 30),
-            
-            if (onAddAddress != null)
-              CustomButton(
-                text: 'Agregar dirección',
-                icon: Icons.add,
-                onPressed: onAddAddress,
-                backgroundColor: AppColors.primary,
-                foregroundColor: Colors.white,
-                width: double.infinity,
-              ),
-            
-            if (onAddAddress != null && onLogout != null)
-              const SizedBox(height: 16),
-            
-            // Botón cerrar sesión
-            if (onLogout != null)
-              CustomButton(
-                text: 'Cerrar sesión',
-                icon: Icons.logout,
-                onPressed: onLogout,
-                type: ButtonType.outlined,
-                foregroundColor: AppColors.error,
-                width: double.infinity,
-              ),
-          ],
-        ),
+                );
+              },
+              padding: const EdgeInsets.all(0),
+              itemCount: addresses.length,
+            ),
+          ),
+        ],
       ),
     );
   }

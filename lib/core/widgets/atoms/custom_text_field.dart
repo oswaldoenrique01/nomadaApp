@@ -99,11 +99,9 @@ class CustomTextField extends StatelessWidget {
           borderSide: BorderSide(color: AppColors.textHint.withAlpha(77)),
         ),
         
-        // Colores de relleno
         filled: true,
         fillColor: enabled ? AppColors.surface : AppColors.background,
         
-        // Estilos de texto
         labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
           color: AppColors.textSecondary,
         ),
