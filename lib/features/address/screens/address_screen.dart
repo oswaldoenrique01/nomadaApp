@@ -69,7 +69,7 @@ class AddAddressScreen extends StatelessWidget {
                     SizedBox(width: AppSizes.size2),
                     Expanded(
                       child: Text(
-                        'Esta dirección se guardará en tu perfil y podrás usarla para entregas y servicios.',
+                        'Esta dirección se guardará en tu perfil y podrás usarla para entregas y servicios...',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: AppColors.textSecondary,
                         ),
