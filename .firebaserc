@@ -1,5 +1,7 @@
 {
   "projects": {
     "default": "ejemplo-16e6b"
-  }
+  },
+  "targets": {},
+  "etags": {}
 }

@@ -2,26 +2,26 @@ name: Deploy to Firebase Hosting on merge
 on:
   push:
     branches:
-      - main  # <-- Asegúrate de que este sea el nombre de tu rama
+      - main  # <-- Asegúrate de que tu rama se llame main, si es master cámbialo aquí
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      # 1. Instalar Flutter en la máquina virtual
+      # 1. Instalar Flutter
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
 
-      # 2. Instalar dependencias y compilar para Web
+      # 2. Construir la versión Web
       - run: flutter pub get
       - run: flutter build web --release
 
-      # 3. Desplegar en Firebase Hosting
+      # 3. Desplegar a Firebase
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_EJEMPLO_16E6B }}'
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_EJEMPLO_16E6B }}
           channelId: live
-          projectId: nomadaapp-16e6b
+          projectId: ejemplo-16e6b
